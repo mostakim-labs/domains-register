@@ -1,0 +1,29 @@
+{
+  "name": "mostakim-domains",
+  "description": "Free subdomain registry by MOSTAKIM DOMAINS — register subdomains via GitHub pull requests.",
+  "version": "1.0.0",
+  "homepage": "https://mostakim.nav.bd/",
+  "author": {
+    "name": "Mostakim",
+    "email": "mostakim.com.mx@gmail.com",
+    "url": "https://mostakim.nav.bd/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mostakim-labs/domains-register"
+  },
+  "devDependencies": {
+    "ava": "^6.2.0",
+    "fs-extra": "^11.2.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "npx ava tests/*.test.js",
+    "lt": "node ./localtests/test.js",
+    "format": "node ./localtests/format.js",
+    "lowercase": "node ./localtests/lowercase.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MOSTAKIM DOMAINS — Free Subdomains</title>
+  <meta name="description" content="Get a free subdomain under mostakim.xyz — powered by GitHub and Cloudflare." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="shortcut icon" href="favicon.svg" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <span class="brand-icon">🌐</span>
+        <span class="brand-name">MOSTAKIM DOMAINS</span>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="#how-it-works" onclick="closeMenu()">How it works</a>
+        <a href="#register" onclick="closeMenu()">Register</a>
+        <a href="https://github.com/mostakim-labs/domains-register" target="_blank">GitHub ↗</a>
+      </div>
+      <button class="nav-burger" id="navBurger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">✨ Free Forever</div>
+      <h1 class="hero-title">
+        Get your free<br />
+        <span class="highlight">*.mostakim.xyz</span><br />
+        subdomain
+      </h1>
+      <p class="hero-subtitle">
+        Point it to your GitHub Pages, server, or any website.<br />
+        No sign-up. Just fill the form and submit a GitHub PR.
+      </p>
+      <div class="hero-btns">
+        <a href="#register" class="btn btn-primary">Get Your Subdomain →</a>
+        <a href="#how-it-works" class="btn btn-ghost">How it works</a>
+      </div>
+      <div class="hero-example">
+        <span class="example-tag">yourname</span>
+        <span class="example-dot">.mostakim.xyz</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <h2 class="section-title">How it works</h2>
+      <p class="section-sub">Three simple steps to get your subdomain live</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Fill the form</h3>
+          <p>Enter your subdomain name, record type, and where it should point. The JSON file generates automatically.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Submit a PR</h3>
+          <p>Download the JSON file, add it to the <code>domains/</code> folder in the GitHub repo, and open a Pull Request.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Go live ✓</h3>
+          <p>Automated checks run on your PR. Once merged, your subdomain goes live in minutes via Cloudflare.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTER FORM -->
+  <section class="section section-dark" id="register">
+    <div class="container">
+      <h2 class="section-title">Register Your Subdomain</h2>
+      <p class="section-sub">Fill in the details — your JSON file will generate instantly</p>
+
+      <div class="register-grid">
+
+        <!-- FORM -->
+        <div class="form-card">
+          <div class="form-group">
+            <label>Subdomain name <span class="req">*</span></label>
+            <div class="input-domain-wrap" id="subdomainWrap">
+              <input type="text" id="subdomain" placeholder="yourname" oninput="onSubdomainInput()" autocomplete="off" spellcheck="false" />
+              <span class="avail-indicator" id="availIndicator"></span>
+              <span class="input-suffix">.mostakim.xyz</span>
+            </div>
+            <div class="field-hint" id="availMsg">Lowercase letters, numbers, and hyphens only</div>
+          </div>
+
+          <div class="form-group">
+            <label>Record type <span class="req">*</span></label>
+            <div class="record-tabs" id="recordTabs">
+              <button class="rtab active" onclick="setRecord('CNAME')">CNAME</button>
+              <button class="rtab" onclick="setRecord('A')">A</button>
+              <button class="rtab" onclick="setRecord('AAAA')">AAAA</button>
+              <button class="rtab" onclick="setRecord('TXT')">TXT</button>
+              <button class="rtab" onclick="setRecord('MX')">MX</button>
+              <button class="rtab" onclick="setRecord('NS')">NS</button>
+            </div>
+            <div class="record-hint" id="recordHint"></div>
+          </div>
+
+          <div class="form-group" id="recordValueGroup">
+            <label id="recordValueLabel">Points to <span class="req">*</span></label>
+            <input type="text" id="recordValue" placeholder="your-username.github.io" oninput="generate()" />
+          </div>
+
+          <div class="form-group">
+            <label>GitHub repository URL <span class="req">*</span></label>
+            <input type="url" id="ownerRepo" placeholder="https://github.com/your-username/your-repo" oninput="generate()" />
+          </div>
+
+          <div class="form-group">
+            <label>Email address</label>
+            <input type="email" id="ownerEmail" placeholder="your@email.com" oninput="generate()" />
+          </div>
+
+          <div class="form-group">
+            <label>Description <small>(optional)</small></label>
+            <input type="text" id="description" placeholder="My personal website" oninput="generate()" />
+          </div>
+
+          <div class="form-group">
+            <label class="toggle-label">
+              <div class="toggle-info">
+                <span>Cloudflare Proxy</span>
+                <small>Enable DDoS protection (only for A/CNAME)</small>
+              </div>
+              <div class="toggle-wrap">
+                <input type="checkbox" id="proxied" onchange="generate()" />
+                <span class="toggle-slider"></span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- PREVIEW + OUTPUT -->
+        <div class="preview-card">
+          <div class="preview-header">
+            <span class="preview-title">📄 Generated JSON</span>
+            <div class="preview-actions">
+              <button class="icon-btn" onclick="copyJSON()" title="Copy to clipboard" id="copyBtn">⎘ Copy</button>
+            </div>
+          </div>
+          <pre class="json-preview" id="jsonPreview"><code id="jsonCode">// Fill in the form to generate your JSON file</code></pre>
+
+          <div class="filename-box" id="filenameBox" style="display:none">
+            <span class="filename-label">File name:</span>
+            <code id="filenameOutput"></code>
+          </div>
+
+          <button class="btn btn-primary btn-full" id="downloadBtn" onclick="downloadJSON()" disabled>
+            ⬇ Download JSON File
+          </button>
+
+          <div class="steps-mini" id="nextSteps" style="display:none">
+            <h4>📋 Next steps</h4>
+            <ol>
+              <li>Download the JSON file above</li>
+              <li><a href="https://github.com/mostakim-labs/domains-register/fork" target="_blank">Fork the repository ↗</a></li>
+              <li>Upload the file to the <code>domains/</code> folder in your fork</li>
+              <li><a href="https://github.com/mostakim-labs/domains-register/pulls" target="_blank" id="prLink">Open a Pull Request ↗</a></li>
+              <li>Wait for automated checks to pass — done! 🎉</li>
+            </ol>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RECORD TYPES -->
+  <section class="section" id="record-types">
+    <div class="container">
+      <h2 class="section-title">Record Types</h2>
+      <p class="section-sub">Which record type should you use?</p>
+      <div class="records-grid">
+        <div class="record-card">
+          <div class="record-badge">CNAME</div>
+          <h4>Website / GitHub Pages</h4>
+          <p>Point your subdomain to another hostname like <code>username.github.io</code> or <code>myapp.vercel.app</code></p>
+        </div>
+        <div class="record-card">
+          <div class="record-badge">A</div>
+          <h4>Own Server (IPv4)</h4>
+          <p>Point your subdomain to an IPv4 address like <code>1.2.3.4</code>. Use this if you have a VPS or dedicated server.</p>
+        </div>
+        <div class="record-card">
+          <div class="record-badge">AAAA</div>
+          <h4>Own Server (IPv6)</h4>
+          <p>Point your subdomain to an IPv6 address. Works the same as A record but for IPv6.</p>
+        </div>
+        <div class="record-card">
+          <div class="record-badge">TXT</div>
+          <h4>Verification / SPF</h4>
+          <p>Used for domain verification (Google, GitHub Pages) or email SPF records.</p>
+        </div>
+        <div class="record-card">
+          <div class="record-badge">MX</div>
+          <h4>Email Routing</h4>
+          <p>Route emails sent to your subdomain to a mail server.</p>
+        </div>
+        <div class="record-card">
+          <div class="record-badge">NS</div>
+          <h4>Custom Nameserver</h4>
+          <p>Delegate your subdomain to a different DNS provider or nameserver.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="brand-icon">🌐</span>
+        <strong>MOSTAKIM DOMAINS</strong>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/mostakim-labs/domains-register" target="_blank">GitHub</a>
+        <a href="https://github.com/mostakim-labs/domains-register/blob/main/README.md" target="_blank">Docs</a>
+        <a href="https://github.com/mostakim-labs/domains-register/blob/main/terms.md" target="_blank">Terms</a>
+        <a href="mailto:mostakim.com.mx@gmail.com">Contact</a>
+      </div>
+      <div class="footer-copy">© 2025 MOSTAKIM DOMAINS · Free subdomains powered by Cloudflare</div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

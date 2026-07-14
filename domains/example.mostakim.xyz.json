@@ -1,0 +1,13 @@
+{
+    "description": "Example subdomain — copy this file, rename it, and fill in your details",
+    "domain": "mostakim.xyz",
+    "subdomain": "example",
+    "owner": {
+        "repo": "https://github.com/your-username/your-repo",
+        "email": "your@email.com"
+    },
+    "record": {
+        "CNAME": "your-username.github.io"
+    },
+    "proxied": false
+}
